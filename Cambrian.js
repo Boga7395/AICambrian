@@ -487,6 +487,11 @@ const techs = [
   "Lido Finance",
   "Threshold Signature Schemes (TSS)"
 ];
+function cryptoRandom() {
+  const buffer = new Uint32Array(1);  // 创建一个 32 位无符号整数数组
+  window.crypto.getRandomValues(buffer);  // 用强随机数填充数组
+  return buffer[0] / 4294967296;  // 将其归一化到 [0, 1) 范围
+}
 function mulberry32(seed) {
   return function () {
     let t = (seed += 0x6d2b79f5);
@@ -502,7 +507,7 @@ function pick(random, list) {
 
 function generateCambrianIdeas(seed =Date.now().toString()+Math.random(), count = 1) {
   console.log(seed)
-  const rand = mulberry32(seed);
+  const rand =cryptoRandom
   const outputs = [];
   for (let i = 0; i < count; i++) {
     const idea = `${pick(rand, goals)}, ${pick(rand, targets)}, ${pick(rand, techs)}.`;
