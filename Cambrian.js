@@ -511,4 +511,3 @@ function generateCambrianIdeas(seed =Date.now().toString()+Math.random(), count 
 
   return outputs.toString();
 }
-console.log(generateCambrianIdeas());
